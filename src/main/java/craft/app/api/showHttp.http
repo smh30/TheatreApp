@@ -1,0 +1,44 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+
+
+
+
+# API LISTING MANAGEMENT
+
+GET {{host-url}}//listings/all
+
+###
+
+GET {{host-url}}//listings/type/sewing
+
+###
+
+GET {{host-url}}//listings/location/Hamilton
+
+###
+
+POST {{host-url}}/listings/create
+Content-Type: application/json
+
+{
+  "title": "Sewing Added",
+  "description": "Another Project Description",
+  "type": "sewing",
+  "client": {
+    "name": "Genny",
+    "location": "Hamilton",
+    "email": "new@test.com"
+  }
+}
+###
+
+DELETE {{host-url}}//listings/delete/74766728-c6fc-4955-9005-cac9e4cb7091
+
+###
+

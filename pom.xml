@@ -12,7 +12,7 @@
     <artifactId>audition</artifactId>
     <version>0.1</version>
     <name>audition</name>
-    <description>Theater app backend</description>
+    <description>Needle app backend</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -26,6 +26,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
         <dependency>

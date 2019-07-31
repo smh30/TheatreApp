@@ -1,13 +1,13 @@
-package theatre.audition;
+package craft.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AuditionApplication {
+public class CraftApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuditionApplication.class, args);
+        SpringApplication.run(CraftApplication.class, args);
     }
 
 }
