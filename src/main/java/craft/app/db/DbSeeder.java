@@ -1,6 +1,6 @@
 package craft.app.db;
 
-import craft.app.models.Listing;
+import craft.app.models.Project;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -14,24 +14,24 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnProperty(name = "craft.db.recreate", havingValue = "true")
 public class DbSeeder implements CommandLineRunner {
-    private ListingRepository listingRepository;
+    private ProjectRepository projectRepository;
     
-    public DbSeeder(ListingRepository listingRepository){
-        this.listingRepository = listingRepository;
+    public DbSeeder(ProjectRepository projectRepository){
+        this.projectRepository = projectRepository;
     }
     
     @Override
     public void run(String... args) throws Exception {
         // Remove all existing entities
-        this.listingRepository.deleteAll();
+        this.projectRepository.deleteAll();
     
     
         // Save some default listings
-        this.listingRepository.save(new Listing("Fairisle sweater", "knitting", "A beautiful sweater I saw on " +
+        this.projectRepository.save(new Project("Fairisle sweater", "knitting", "A beautiful sweater I saw on " +
                 "Instagram", "Mona", "Wellington", "m@test.com"));
-        this.listingRepository.save(new Listing("Childrens' gloves", "knitting", "Yellow gloves for my neice",
+        this.projectRepository.save(new Project("Childrens' gloves", "knitting", "Yellow gloves for my neice",
                 "Barry", "Hamilton", "baz@test.com"));
-        this.listingRepository.save(new Listing("Summer dress", "sewing", "Vintage-style dress for everyday " +
+        this.projectRepository.save(new Project("Summer dress", "sewing", "Vintage-style dress for everyday " +
                 "wear", "Kim", "Raglan", "kim@test.com"));
         
         

@@ -8,14 +8,14 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-public class Listing {
+public class Project {
     
     @Id
     private UUID listingId;
     
     private String title;
     private String description;
-   // private Client client;
+    private UUID creator;
     private String type;
     private Date dateListed;
     //todo an "urgency" variable. enum?
@@ -23,19 +23,20 @@ public class Listing {
     
     
     
-    public Listing() {
+    public Project() {
         this.listingId = UUID.randomUUID();
         this.dateListed = new Date();
     }
     
-    public Listing(String title, String type, String description, String clientName,
+    public Project(String title, String type, String description, String clientName,
                    String clientLocation,
                    String clientEmail) {
         this();
         this.title = title;
         this.type = type;
         this.description = description;
-        //this.client = new Client(clientName, clientEmail, clientLocation);
+        User projectCreator = new User(clientName, clientEmail, clientLocation);
+        this.creator = projectCreator.getUserId();
         
     }
     
@@ -51,9 +52,10 @@ public class Listing {
         return description;
     }
     
-//    public Client getClient() {
-//        return client;
-//    }
+    public User getCreator() {
+        //get the user with that id and return it;
+        return null;
+    }
     
     public String getType() {
         return type;
