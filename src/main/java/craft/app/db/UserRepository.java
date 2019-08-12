@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository  extends JpaRepository<User, UUID> {
+public interface UserRepository  extends JpaRepository<User, Long> {
     //can add custom methods here if necessary
     
 }

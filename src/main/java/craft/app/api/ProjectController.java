@@ -45,7 +45,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/delete/{listingId}", method =  RequestMethod.DELETE)
-    public List<Project> deleteListing(@PathVariable UUID listingId){
+    public List<Project> deleteListing(@PathVariable Long listingId){
         projectRepository.deleteById(listingId);
         return projectRepository.findAll();
     }

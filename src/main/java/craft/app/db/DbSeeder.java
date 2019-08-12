@@ -15,17 +15,17 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = "craft.db.recreate", havingValue = "true")
 public class DbSeeder implements CommandLineRunner {
     private ProjectRepository projectRepository;
-    
+
     public DbSeeder(ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
     }
-    
+
     @Override
     public void run(String... args) throws Exception {
         // Remove all existing entities
         this.projectRepository.deleteAll();
-    
-    
+
+
         // Save some default listings
         this.projectRepository.save(new Project("Fairisle sweater", "knitting", "A beautiful sweater I saw on " +
                 "Instagram", "Mona", "Wellington", "m@test.com"));
@@ -33,9 +33,9 @@ public class DbSeeder implements CommandLineRunner {
                 "Barry", "Hamilton", "baz@test.com"));
         this.projectRepository.save(new Project("Summer dress", "sewing", "Vintage-style dress for everyday " +
                 "wear", "Kim", "Raglan", "kim@test.com"));
-        
-        
-        
+
+
+
         System.out.println("Initialized database");
     }
 }

@@ -2,8 +2,7 @@ package craft.app.models;
 
 //import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -11,20 +10,28 @@ import java.util.UUID;
 public class Project {
     
     @Id
-    private UUID listingId;
+    @GeneratedValue
+    private long projectID;
     
     private String title;
     private String description;
-    private UUID creator;
+    //todo change this into a long???? maybe
+    //private UUID creator;
     private String type;
     private Date dateListed;
+    
+    //https://stackoverflow.com/questions/2302802/object-references-an-unsaved-transient-instance
+    // -save-the-transient-instance-be
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="creatorID")
+    private User creator;
     //todo an "urgency" variable. enum?
     //todo add a photo
     
     
     
     public Project() {
-        this.listingId = UUID.randomUUID();
+        
         this.dateListed = new Date();
     }
     
@@ -36,12 +43,12 @@ public class Project {
         this.type = type;
         this.description = description;
         User projectCreator = new User(clientName, clientEmail, clientLocation);
-        this.creator = projectCreator.getUserId();
+        this.creator = new User(clientName, clientLocation, clientEmail);
         
     }
     
-    public UUID getListingId() {
-        return listingId;
+    public long getProjectID() {
+        return projectID;
     }
     
     public String getTitle() {
@@ -54,10 +61,12 @@ public class Project {
     
     public User getCreator() {
         //get the user with that id and return it;
-        return null;
+        return this.creator;
     }
     
     public String getType() {
         return type;
     }
+    
+    
 }

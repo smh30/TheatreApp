@@ -27,18 +27,18 @@ POST {{host-url}}/listings/create
 Content-Type: application/json
 
 {
-  "title": "Sewing Added",
-  "description": "Another Project Description",
+  "title": "2Sewing another Added",
+  "description": "Yet more Project Description",
   "type": "sewing",
-  "client": {
-    "name": "Genny",
-    "location": "Hamilton",
-    "email": "new@test.com"
-  }
+"creator": {
+  "name": "Genny",
+  "location": "Hamilton",
+  "email": "new@test.com"
+}
 }
 ###
 
-DELETE {{host-url}}//listings/delete/74766728-c6fc-4955-9005-cac9e4cb7091
+DELETE {{host-url}}//listings/delete/9
 
 ###
 
