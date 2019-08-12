@@ -43,7 +43,7 @@ public class Project {
         this.type = type;
         this.description = description;
         User projectCreator = new User(clientName, clientEmail, clientLocation);
-        this.creator = new User(clientName, clientLocation, clientEmail);
+        this.creator = projectCreator;
         
     }
     

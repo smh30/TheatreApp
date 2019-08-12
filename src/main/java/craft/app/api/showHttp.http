@@ -27,18 +27,18 @@ POST {{host-url}}/listings/create
 Content-Type: application/json
 
 {
-  "title": "2Sewing another Added",
+  "title": "Moooore another Added",
   "description": "Yet more Project Description",
   "type": "sewing",
 "creator": {
-  "name": "Genny",
+  "name": "Sarah",
   "location": "Hamilton",
   "email": "new@test.com"
 }
 }
 ###
 
-DELETE {{host-url}}//listings/delete/9
+DELETE {{host-url}}//listings/delete/8
 
 ###
 
