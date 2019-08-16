@@ -20,6 +20,10 @@ public class Project {
     private String type;
     private Date dateListed;
     
+    @Lob
+    private byte[] projectImage;
+    
+    
     //https://stackoverflow.com/questions/2302802/object-references-an-unsaved-transient-instance
     // -save-the-transient-instance-be
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -45,6 +49,7 @@ public class Project {
         User projectCreator = new User(clientName, clientEmail, clientLocation);
         this.creator = projectCreator;
         
+        
     }
     
     public long getProjectID() {
@@ -68,5 +73,7 @@ public class Project {
         return type;
     }
     
-    
+    public Date getDateListed() {
+        return dateListed;
+    }
 }
