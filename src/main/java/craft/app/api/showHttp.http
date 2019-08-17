@@ -27,7 +27,7 @@ POST {{host-url}}/listings/create
 Content-Type: application/json
 
 {
-  "title": "Moooore another Added",
+  "title": "Bore another Added",
   "description": "Yet more Project Description",
   "type": "sewing",
 "creator": {

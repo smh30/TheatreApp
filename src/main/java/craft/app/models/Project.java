@@ -48,8 +48,12 @@ public class Project {
         this.description = description;
         User projectCreator = new User(clientName, clientEmail, clientLocation);
         this.creator = projectCreator;
+        //todo add projectimage at this point after the workings are figured out
         
-        
+    }
+    
+    public void setProjectImage(byte[] uploadedImage){
+        this.projectImage = uploadedImage;
     }
     
     public long getProjectID() {
@@ -75,5 +79,9 @@ public class Project {
     
     public Date getDateListed() {
         return dateListed;
+    }
+    
+    public byte[] getProjectImage() {
+        return projectImage;
     }
 }
