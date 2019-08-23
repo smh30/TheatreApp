@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping(value = "/listings")
+@RequestMapping(value = "/projects")
 @CrossOrigin
 public class ProjectController {
     private ProjectRepository projectRepository;
@@ -25,17 +25,17 @@ public class ProjectController {
 
     }
     
-    @GetMapping("/all")
+    @GetMapping
     public List<Project> all(){
         return this.projectRepository.findAll();
     }
    
-    
-    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
-    public List<Project> getByType (@PathVariable String type){
-        return this.projectRepository.findByType(type);
-
-    }
+    //todo check if this is required: i think this is solved in frontend filter
+//    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
+//    public List<Project> getByType (@PathVariable String type){
+//        return this.projectRepository.findByType(type);
+//
+//    }
 
     //todo get this working; location is a property of the client not the project
 //    @RequestMapping(value = "/location/{location}", method = RequestMethod.GET)
@@ -43,27 +43,27 @@ public class ProjectController {
 //        return listingRepository.findByLocation(location);
 //    }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping
     public Project addListing(@RequestBody Project newProject){
         this.projectRepository.save(newProject);
         //changed this to just return the new project, so that id can be extracted
         return newProject;
     }
 
-    @RequestMapping(value = "/delete/{listingId}", method =  RequestMethod.DELETE)
-    public List<Project> deleteListing(@PathVariable Long listingId){
-        projectRepository.deleteById(listingId);
+    @DeleteMapping(value = "/{projectId}")
+    public List<Project> deleteListing(@PathVariable Long projectId){
+        projectRepository.deleteById(projectId);
         return projectRepository.findAll();
     }
     
-    @PostMapping(value = "/{listingId}/addImage")
+    @PostMapping(value = "/{projectId}/addImage")
     //todo use a multipart form here???
-    public Project addImage(@PathVariable long listingId,
+    public Project addImage(@PathVariable long projectId,
                             @RequestParam("file") MultipartFile imageToAdd){
         //this needs an .orelse for if it can't find that project id
         //todo proper error handling?
         //https://stackoverflow.com/questions/49316751/spring-data-jpa-findone-change-to-optional-how-to-use-this
-        Project currentProject = this.projectRepository.findById(listingId).orElse(null);
+        Project currentProject = this.projectRepository.findById(projectId).orElse(null);
         if(currentProject != null) {
 //            imageToAdd.getContentType();
 //

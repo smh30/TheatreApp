@@ -11,20 +11,22 @@
 
 # API LISTING MANAGEMENT
 
-GET {{host-url}}//listings/all
+GET {{host-url}}/projects
 
 ###
 
-GET {{host-url}}//listings/type/sewing
+#GET {{host-url}}//listings/type/sewing
 
 ###
 
-GET {{host-url}}//listings/location/Hamilton
+#GET {{host-url}}//listings/location/Hamilton
 
 ###
 
-POST {{host-url}}/listings/create
+POST {{host-url}}/projects
 Content-Type: application/json
+Authorization: Basic Ym9iOmJvYjEyMw==
+
 
 {
   "title": "Bore another Added",
@@ -38,7 +40,18 @@ Content-Type: application/json
 }
 ###
 
-DELETE {{host-url}}//listings/delete/8
+POST {{host-url}}/login
+Content-Type: application/json
+
+{
+"username": "user",
+"password": "password"
+}
+
+###
+
+DELETE {{host-url}}/projects/5
+Authorization: Basic Ym9iOmJvYjEyMw==
 
 ###
 
