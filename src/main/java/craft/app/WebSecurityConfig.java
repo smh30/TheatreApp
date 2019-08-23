@@ -17,7 +17,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
     //this "configure" defines a datasource for the users
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
@@ -27,9 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .withUser("bob").password(passwordEncoder().encode("bob123")).roles("USER")
             .and()
             .withUser("sally").password(passwordEncoder().encode("sally123")).roles("USER");
-    
+
     }
-    
+
     //this one authorises the requests
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //https://stackoverflow.com/questions/18399433/spring-security-java-config-how-to-add-the-method-type
                 //anyone at all can view all listings
-                
+
                 .antMatchers(HttpMethod.DELETE,"/projects/**").authenticated()
                 //only logged in users can create
                 .antMatchers(HttpMethod.POST,"/projects").authenticated()
@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
     }
-    
+
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

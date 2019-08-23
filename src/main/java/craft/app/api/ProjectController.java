@@ -2,6 +2,7 @@ package craft.app.api;
 
 import craft.app.db.ProjectRepository;
 import craft.app.models.Project;
+import craft.app.models.ProjectViewModel;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,6 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,8 +28,13 @@ public class ProjectController {
     }
     
     @GetMapping
-    public List<Project> all(){
-        return this.projectRepository.findAll();
+    public List<ProjectViewModel> all(){
+        List<Project> projects = this.projectRepository.findAll();
+        List<ProjectViewModel> pvm = new ArrayList<>();
+        for (Project project : projects) {
+            pvm.add(new ProjectViewModel(project));
+        }
+        return pvm;
     }
    
     //todo check if this is required: i think this is solved in frontend filter
