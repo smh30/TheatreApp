@@ -40,13 +40,14 @@ public class Project {
     }
     
     public Project(String title, String type, String description, String clientName,
-                   String clientLocation,
-                   String clientEmail) {
+                   
+                   String clientEmail,String clientLocation) {
         this();
         this.title = title;
         this.type = type;
         this.description = description;
-        User projectCreator = new User(clientName, clientEmail, clientLocation);
+        //the location here is actually becoming password for now
+        User projectCreator = new User(clientName,  clientLocation, clientEmail);
         this.creator = projectCreator;
         //todo add projectimage at this point after the workings are figured out
         

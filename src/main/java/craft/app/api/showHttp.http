@@ -34,7 +34,7 @@ Authorization: Basic Ym9iOmJvYjEyMw==
   "description": "Yet more Project Description",
   "type": "sewing",
 "creator": {
-  "name": "Sarah",
+  "username": "Sarah",
   "location": "Hamilton",
   "email": "new@test.com"
 }

@@ -2,7 +2,6 @@ package craft.app.models;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class User {
@@ -11,11 +10,13 @@ public class User {
     @GeneratedValue
     private Long userId;
 
-    @Column(unique = true)
-    private String name;
+    @Column(unique = true, nullable = false)
+    private String username;
     
     private String email;
-    private String location;
+    //private String location;
+    
+    @Column(nullable = false)
     private String password;
     
     
@@ -27,33 +28,35 @@ public class User {
 
     //just these for now: will add methods later
 
-    public User(String name, String email, String location) {
+    public User(String username, String password, String email) {
         this();
-        this.name = name;
+        this.username = username;
+        this.password = password;
         this.email = email;
-        this.location = location;
+        
     }
 
-    public User() {
-    
+    protected User() {
     }
     
     
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getLocation() {
-        return location;
-    }
+//    public String getLocation() {
+//        return location;
+//    }
     
-    public long getUserId(){
+    public Long getUserId(){
         return userId;
     }
     
-
+    public String getPassword() {
+        return password;
+    }
 }
