@@ -1,9 +1,8 @@
 package craft.app.api;
 
 import craft.app.db.UserRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import craft.app.models.User;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -14,4 +13,10 @@ public class UserController {
     public UserController(UserRepository userRepository){
         this.userRepository = userRepository;
     }
+    
+//    @PostMapping
+//    public User UserValidation(@RequestParam String username, @RequestParam String password){
+//        if (userRepository.findOne())
+//        return validatedUser;
+//    }
 }
