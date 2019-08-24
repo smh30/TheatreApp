@@ -13,7 +13,7 @@ public class ProjectViewModel {
     
     private byte[] projectImage;
     
-    private UserViewModel userViewModel;
+    private UserViewModel creator;
     
     public ProjectViewModel(Project project){
         this.projectID = project.getProjectID();
@@ -22,7 +22,7 @@ public class ProjectViewModel {
         this.type = project.getType();
         this.dateListed = project.getDateListed();
         this.projectImage = project.getProjectImage();
-        this.userViewModel = new UserViewModel(project.getCreator());
+        this.creator = new UserViewModel(project.getCreator());
     }
     
     public long getProjectID() {
@@ -49,7 +49,7 @@ public class ProjectViewModel {
         return projectImage;
     }
     
-    public UserViewModel getUserViewModel() {
-        return userViewModel;
+    public UserViewModel getCreator() {
+        return creator;
     }
 }

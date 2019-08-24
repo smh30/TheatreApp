@@ -18,7 +18,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //this "configure" defines a datasource for the users
+//    //this "configure" defines a datasource for the users
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
     auth.inMemoryAuthentication()
@@ -29,13 +29,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .withUser("sally").password(passwordEncoder().encode("sally123")).roles("USER");
 
     }
-
-    //this one authorises the requests
+//
+//    //this one authorises the requests/protects the resources
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().cors()
+        http
+                //.csrf().disable().cors()
                 //well aware that disabling this is a security issue, but gotta move on
-                .and()
+                //.and()
                 .authorizeRequests()
                 //https://stackoverflow.com/questions/18399433/spring-security-java-config-how-to-add-the-method-type
                 //anyone at all can view all listings
