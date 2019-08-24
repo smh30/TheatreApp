@@ -11,7 +11,7 @@
     <groupId>theatre</groupId>
     <artifactId>audition</artifactId>
     <version>0.1</version>
-    <name>audition</name>
+    <username>audition</username>
     <description>Needle app backend</description>
 
     <properties>

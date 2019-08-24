@@ -1,33 +1,38 @@
 package craft.app;
 
+import craft.app.security.UserPrincipalDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-//    //this "configure" defines a datasource for the users
+    private UserPrincipalDetailsService userPrincipalDetailsService;
+    
+    public WebSecurityConfig(UserPrincipalDetailsService userPrincipalDetailsService) {
+        this.userPrincipalDetailsService = userPrincipalDetailsService;
+    }
+    
+    //    //this "configure" defines a datasource for the users
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-    auth.inMemoryAuthentication()
-            .withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN")
-            .and()
-            .withUser("bob").password(passwordEncoder().encode("bob123")).roles("USER")
-            .and()
-            .withUser("sally").password(passwordEncoder().encode("sally123")).roles("USER");
+    auth
+//            .inMemoryAuthentication()
+//            .withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN")
+//            .and()
+//            .withUser("bob").password(passwordEncoder().encode("bob123")).roles("USER")
+//            .and()
+//            .withUser("sally").password(passwordEncoder().encode("sally123")).roles("USER");
 
+        .authenticationProvider(authenticationProvider());
     }
 //
 //    //this one authorises the requests/protects the resources
@@ -45,8 +50,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //only logged in users can create
                 .antMatchers(HttpMethod.POST,"/projects").authenticated()
                 .antMatchers(HttpMethod.GET,"/projects").permitAll()
+                .antMatchers(HttpMethod.GET, "/users").authenticated()
                 .and()
                 .httpBasic();
+    }
+    
+    
+    
+    @Bean
+    DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsService);
+        
+        return daoAuthenticationProvider;
     }
 
     @Bean
