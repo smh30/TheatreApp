@@ -12,7 +12,7 @@
 # API LISTING MANAGEMENT
 
 GET {{host-url}}/projects
-Authorization: Basic Ym9iOmJvYjEyMw==
+#Authorization: Basic Ym9iOmJvYjEyMw==
 
 ###
 
