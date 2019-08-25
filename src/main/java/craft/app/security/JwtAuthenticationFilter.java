@@ -2,6 +2,7 @@ package craft.app.security;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import craft.app.models.LoginViewModel;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -64,7 +65,18 @@ private AuthenticationManager authenticationManager;
                 .sign(HMAC512(JwtProperties.SECRET.getBytes()));
         
         //Add token in response
-        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + token);
+        
+        JsonObject authResponse = new JsonObject();
+        authResponse.addProperty("token", JwtProperties.TOKEN_PREFIX + token);
+        authResponse.addProperty("expiresIn", JwtProperties.EXPIRATION_TIME);
+        
+        
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.getWriter().write(authResponse.toString());
+        
+        //this was the method in tutorial
+        //response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + token);
         
     }
 }

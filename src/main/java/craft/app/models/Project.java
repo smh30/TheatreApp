@@ -47,6 +47,8 @@ public class Project {
         this.type = type;
         this.description = description;
         //the location here is actually becoming password for now
+        
+        //todo figure out how to deal with link to user
         User projectCreator = new User(clientName,  clientLocation, clientEmail);
         this.creator = projectCreator;
         //todo add projectimage at this point after the workings are figured out

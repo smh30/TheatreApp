@@ -16,7 +16,7 @@ public class User {
     private String email;
     //private String location;
     
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String password;
     
     

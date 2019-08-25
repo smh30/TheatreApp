@@ -16,9 +16,19 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@CrossOrigin
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserPrincipalDetailsService userPrincipalDetailsService;
     private UserRepository userRepository;
@@ -41,8 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    //this one authorises the requests/protects the resources
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.cors().and()
                 .csrf().disable()
+                
                 //well aware that disabling this is a security issue, but gotta move on
                 
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -72,6 +83,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         
         return daoAuthenticationProvider;
     }
+    
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+//        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
+    
+  @Bean
+  public WebMvcConfigurer corsConfigurer(){
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry){
+                registry.addMapping("/**");
+            }
+        };
+  }
+    
+    
 
     @Bean
     PasswordEncoder passwordEncoder(){
