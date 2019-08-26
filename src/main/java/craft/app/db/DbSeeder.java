@@ -42,15 +42,16 @@ public class DbSeeder implements CommandLineRunner {
         User sally = new User("sally", passwordEncoder.encode("sally123"), "sally@mail.com");
         List<User> users = Arrays.asList(bob, sally);
         
-        this.userRepository.saveAll(users);
+        users = this.userRepository.saveAll(users);
     
         // Save some default listings
-//        this.projectRepository.save(new Project("Fairisle sweater", "knitting", "A beautiful sweater I saw on " +
-//                "Instagram", "Mona", "m@test.com", "r"));
-//        this.projectRepository.save(new Project("Childrens' gloves", "knitting", "Yellow gloves for my neice",
-//                "Barry", "baz@test.com", "i"));
+//        this.projectRepository.save(new Project("Fairisle sweater", "knitting", "A beautiful " +
+//                "sweater I saw on " +
+//                "Instagram", users.get(0).getUsername()));
+        this.projectRepository.save(new Project("Childrens' gloves", "knitting", "Yellow gloves for my neice",
+                new User("kim", passwordEncoder.encode("kim123"), "kim@mail.com")));
 //        this.projectRepository.save(new Project("Summer dress", "sewing", "Vintage-style dress for everyday " +
-//                "wear", "Kim", "kim@test.com", "p"));
+//                "wear", users.get(0).getUsername()));
 
 
         System.out.println("Initialized database");

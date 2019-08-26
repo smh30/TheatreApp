@@ -5,6 +5,9 @@ import craft.app.db.UserRepository;
 import craft.app.models.Project;
 import craft.app.models.ProjectViewModel;
 import craft.app.models.User;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +23,7 @@ import java.util.List;
 public class ProjectController {
     private ProjectRepository projectRepository;
     private UserRepository userRepository;
+   
     
     
     
@@ -75,9 +79,21 @@ public class ProjectController {
     
     @DeleteMapping(value = "/{projectId}")
     public List<Project> deleteListing(@PathVariable Long projectId){
-        projectRepository.deleteById(projectId);
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        
+        String projectcreator = projectRepository.getOne(projectId).getCreator().getUsername();
+        String loggedin = authentication.getName();
+        if (projectcreator.equals(loggedin)) {
+            projectRepository.deleteById(projectId);
+        } else {
+            //todo throw some sort of error
+        }
         return projectRepository.findAll();
     }
+    
+    
     
     @PostMapping(value = "/{projectId}/addImage")
     //todo use a multipart form here???
