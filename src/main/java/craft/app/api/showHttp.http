@@ -41,6 +41,22 @@ Authorization: Basic Ym9iOmJvYjEyMw==
 }
 ###
 
+###
+
+POST {{host-url}}/users
+Content-Type: application/json
+
+
+{
+
+  "username": "Sarah",
+  "password": "sarah123",
+  "email": "new@test.com"
+
+}
+
+###
+
 POST {{host-url}}/login
 Content-Type: application/json
 

@@ -66,10 +66,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //https://stackoverflow.com/questions/18399433/spring-security-java-config-how-to-add-the-method-type
                 .antMatchers("/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/projects/**").authenticated()
                 .antMatchers(HttpMethod.POST,"/projects").authenticated()
                 .antMatchers(HttpMethod.GET,"/projects").permitAll()
-                .antMatchers(HttpMethod.GET, "/users").authenticated();
+                .antMatchers(HttpMethod.GET, "/users/**").authenticated();
                 
     }
     

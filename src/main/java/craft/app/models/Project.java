@@ -11,12 +11,11 @@ public class Project {
     
     @Id
     @GeneratedValue
+    @Column(nullable = false, length=10)
     private long projectID;
     
     private String title;
     private String description;
-    //todo change this into a long???? maybe
-    //private UUID creator;
     private String type;
     private Date dateListed;
     
@@ -32,6 +31,8 @@ public class Project {
     //todo an "urgency" variable. enum?
     //todo add a photo
     
+    private Long newCreatorId;
+    
     
     
     public Project() {
@@ -39,18 +40,17 @@ public class Project {
         this.dateListed = new Date();
     }
     
-    public Project(String title, String type, String description, String clientName,
-                   
-                   String clientEmail,String clientLocation) {
+    public Project(String title, String type, String description, String clientName) {
         this();
-        this.title = title;
-        this.type = type;
-        this.description = description;
-        //the location here is actually becoming password for now
-        
-        //todo figure out how to deal with link to user
-        User projectCreator = new User(clientName,  clientLocation, clientEmail);
-        this.creator = projectCreator;
+//        this.title = title;
+//        this.type = type;
+//        this.description = description;
+//        //the location here is actually becoming password for now
+//
+//
+//        //todo figure out how to deal with link to user
+//        //User projectCreator = userRepository.getUserByUsername(clientName);
+//        this.creator = projectCreator;
         //todo add projectimage at this point after the workings are figured out
         
     }
@@ -86,5 +86,13 @@ public class Project {
     
     public byte[] getProjectImage() {
         return projectImage;
+    }
+    
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+    
+    public Long getNewCreatorId() {
+        return newCreatorId;
     }
 }

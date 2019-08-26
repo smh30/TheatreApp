@@ -1,18 +1,17 @@
 package craft.app.api;
 
 import craft.app.db.ProjectRepository;
+import craft.app.db.UserRepository;
 import craft.app.models.Project;
 import craft.app.models.ProjectViewModel;
+import craft.app.models.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 
 @RestController
@@ -20,11 +19,15 @@ import java.util.UUID;
 @CrossOrigin
 public class ProjectController {
     private ProjectRepository projectRepository;
+    private UserRepository userRepository;
     
     
-    public ProjectController(ProjectRepository projectRepository) {
+    
+    public ProjectController(ProjectRepository projectRepository, UserRepository userRepository) {
         this.projectRepository = projectRepository;
-
+    
+    
+        this.userRepository = userRepository;
     }
     
     @GetMapping
@@ -50,13 +53,26 @@ public class ProjectController {
 //        return listingRepository.findByLocation(location);
 //    }
 
+    
+    
+    
     @PostMapping
     public Project addListing(@RequestBody Project newProject){
+        List<User> temp = userRepository.findAllById(Arrays.asList(newProject.getNewCreatorId()));
+        
+        
+        User projectCreator = temp.get(0);
+        
+        newProject.setCreator(projectCreator);
+        
         this.projectRepository.save(newProject);
         //changed this to just return the new project, so that id can be extracted
         return newProject;
     }
 
+    
+    
+    
     @DeleteMapping(value = "/{projectId}")
     public List<Project> deleteListing(@PathVariable Long projectId){
         projectRepository.deleteById(projectId);

@@ -45,12 +45,12 @@ public class DbSeeder implements CommandLineRunner {
         this.userRepository.saveAll(users);
     
         // Save some default listings
-        this.projectRepository.save(new Project("Fairisle sweater", "knitting", "A beautiful sweater I saw on " +
-                "Instagram", "Mona", "m@test.com", "r"));
-        this.projectRepository.save(new Project("Childrens' gloves", "knitting", "Yellow gloves for my neice",
-                "Barry", "baz@test.com", "i"));
-        this.projectRepository.save(new Project("Summer dress", "sewing", "Vintage-style dress for everyday " +
-                "wear", "Kim", "kim@test.com", "p"));
+//        this.projectRepository.save(new Project("Fairisle sweater", "knitting", "A beautiful sweater I saw on " +
+//                "Instagram", "Mona", "m@test.com", "r"));
+//        this.projectRepository.save(new Project("Childrens' gloves", "knitting", "Yellow gloves for my neice",
+//                "Barry", "baz@test.com", "i"));
+//        this.projectRepository.save(new Project("Summer dress", "sewing", "Vintage-style dress for everyday " +
+//                "wear", "Kim", "kim@test.com", "p"));
 
 
         System.out.println("Initialized database");
