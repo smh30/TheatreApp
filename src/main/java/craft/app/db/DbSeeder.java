@@ -48,7 +48,8 @@ public class DbSeeder implements CommandLineRunner {
 //        this.projectRepository.save(new Project("Fairisle sweater", "knitting", "A beautiful " +
 //                "sweater I saw on " +
 //                "Instagram", users.get(0).getUsername()));
-        this.projectRepository.save(new Project("Childrens' gloves", "knitting", "Yellow gloves for my neice",
+        this.projectRepository.save(new Project("Childrens' gloves", "knitting", "Yellow gloves " +
+                "for my neice","hamilton",
                 new User("kim", passwordEncoder.encode("kim123"), "kim@mail.com")));
 //        this.projectRepository.save(new Project("Summer dress", "sewing", "Vintage-style dress for everyday " +
 //                "wear", users.get(0).getUsername()));
