@@ -43,6 +43,15 @@ public class ProjectController {
         }
         return pvm;
     }
+    
+    
+   
+    @GetMapping(value = "/{projectId}")
+    public ProjectViewModel single(@PathVariable Long projectId){
+        Project project = projectRepository.getOne(projectId);
+        
+        return new ProjectViewModel(project);
+    }
    
     //todo check if this is required: i think this is solved in frontend filter
 //    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
@@ -72,6 +81,15 @@ public class ProjectController {
         this.projectRepository.save(newProject);
         //changed this to just return the new project, so that id can be extracted
         return newProject;
+    }
+    
+    @PutMapping
+    public Project editListing(@RequestBody Project editedProject){
+        
+    
+        this.projectRepository.save(editedProject);
+        //changed this to just return the new project, so that id can be extracted
+        return editedProject;
     }
 
     
