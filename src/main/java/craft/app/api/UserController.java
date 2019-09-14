@@ -1,5 +1,6 @@
 package craft.app.api;
 
+import craft.app.db.CheckUsername;
 import craft.app.db.UserRepository;
 import craft.app.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,6 +38,11 @@ return userRepository.findAll();
 private String encodePassword(String rawPassword){
         return passwordEncoder.encode(rawPassword);
 }
+    
+    @GetMapping(value="/checkUsername/{username}")
+    public CheckUsername checkUsername(@PathVariable String username){
+        return userRepository.findAllByUsername(username);
+    }
     
     @GetMapping(value="/byUsername/{username}")
     public User userByUsername(@PathVariable String username){

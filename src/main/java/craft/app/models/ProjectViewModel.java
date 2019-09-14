@@ -10,7 +10,7 @@ public class ProjectViewModel {
     private String description;
     private String type;
     private Date dateListed;
-    private String location;
+    //private String location;
     
     private byte[] projectImage;
     
@@ -21,7 +21,7 @@ public class ProjectViewModel {
         this.title = project.getTitle();
         this.description = project.getDescription();
         this.type = project.getType();
-        this.location = project.getLocation();
+        //this.location = project.getLocation();
         this.dateListed = project.getDateListed();
         this.projectImage = project.getProjectImage();
         this.creator = new UserViewModel(project.getCreator());
@@ -55,7 +55,7 @@ public class ProjectViewModel {
         return creator;
     }
     
-    public String getLocation() {
-        return location;
-    }
+//    public String getLocation() {
+//        return location;
+//    }
 }

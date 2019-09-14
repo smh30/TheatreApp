@@ -15,9 +15,12 @@ public class Project {
     private long projectID;
     
     private String title;
+    
+    @Lob
     private String description;
+    
     private String type;
-    private String location;
+    //private String location;
     private Date dateListed;
     
     @Lob
@@ -57,12 +60,12 @@ public class Project {
     }
     
     //for seeding the db
-    public Project(String title, String type, String description, String location,
+    public Project(String title, String type, String description,
                    User projectCreator) {
         this();
         this.title = title;
         this.type = type;
-        this.location = location;
+        //this.location = location;
         this.description = description;
         //the location here is actually becoming password for now
 
@@ -115,7 +118,5 @@ public class Project {
         return newCreatorId;
     }
     
-    public String getLocation() {
-        return location;
-    }
+   
 }
