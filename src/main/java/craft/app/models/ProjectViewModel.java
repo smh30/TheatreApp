@@ -3,25 +3,29 @@ package craft.app.models;
 import javax.persistence.Lob;
 import java.util.Date;
 
+/**
+ * A ViewModel for the Project class, which is returned by the API when http calls are made
+ */
 public class ProjectViewModel {
-    private long projectID;
     
+    private long projectID;
     private String title;
     private String description;
     private String type;
     private Date dateListed;
-    //private String location;
-    
     private byte[] projectImage;
-    
     private UserViewModel creator;
     
+    /**
+     * Create a new ProjectViewModel from an existing Project. Sets all other variables equal to
+     * those in the Project, and creates a UserViewModel from the User creator.
+     * @param project
+     */
     public ProjectViewModel(Project project){
         this.projectID = project.getProjectID();
         this.title = project.getTitle();
         this.description = project.getDescription();
         this.type = project.getType();
-        //this.location = project.getLocation();
         this.dateListed = project.getDateListed();
         this.projectImage = project.getProjectImage();
         this.creator = new UserViewModel(project.getCreator());
@@ -55,7 +59,4 @@ public class ProjectViewModel {
         return creator;
     }
     
-//    public String getLocation() {
-//        return location;
-//    }
 }
