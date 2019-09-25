@@ -1,6 +1,6 @@
 package craft.app.api;
 
-import craft.app.db.CheckUsername;
+//import craft.app.db.CheckUsername;
 import craft.app.db.UserRepository;
 import craft.app.models.User;
 import craft.app.models.UserViewModel;
@@ -71,25 +71,31 @@ public class UserController {
         return passwordEncoder.encode(rawPassword);
     }
     
+    
+    //todo is this method needed??
     /**
      * Checks if a given username exists in the database already - used when a new user registers
      * to make sure their username is unique
      * @param username The username to be checked
      * @return A CheckUsername object with the given username, or null
      */
-    @GetMapping(value = "/checkUsername/{username}")
-    public CheckUsername checkUsername(@PathVariable String username) {
-        return userRepository.findAllByUsername(username);
-    }
-    
-    //todo is this method needed??
-//    /**
-//     * Gets the information for the user with a given username
-//     * @param username The username of the User to be searched
-//     * @return A UserViewModel with the details of the selected user
-//     */
-//    @GetMapping(value = "/byUsername/{username}")
-//    public UserViewModel userByUsername(@PathVariable String username) {
-//        return new UserViewModel(userRepository.findByUsername(username));
+//    @GetMapping(value = "/checkUsername/{username}")
+//    public CheckUsername checkUsername(@PathVariable String username) {
+//        return userRepository.findAllByUsername(username);
 //    }
+    
+    
+    /**
+     * Gets the information for the user with a given username
+     * @param username The username of the User to be searched
+     * @return A UserViewModel with the details of the selected user
+     */
+    @GetMapping(value = "/byUsername/{username}")
+    public UserViewModel userByUsername(@PathVariable String username) {
+        User found = userRepository.findByUsername(username);
+        if (found != null) {
+            return new UserViewModel(found);
+        }
+        return new UserViewModel(new User ("", "", ""));
+    }
 }

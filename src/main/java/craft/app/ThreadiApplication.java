@@ -10,6 +10,9 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * Main method of the app. Sets up the basic properties
+ */
 @SpringBootApplication
 public class ThreadiApplication {
     
@@ -17,8 +20,13 @@ public class ThreadiApplication {
         SpringApplication.run(ThreadiApplication.class, args);
     }
     
+    /**
+     * Sets up SSL to secure the app, and redirects http requests to https
+     * @return
+     */
     @Bean
     public ServletWebServerFactory servletContainer() {
+        
         //Enable SSL Traffic
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
             @Override
@@ -41,7 +49,6 @@ public class ThreadiApplication {
     }
     
     // Needs to redirect from HTTP to HTTPS, so redirect the old port 8082 to the new 8443
-
     private Connector httpToHttpsRedirectConnector(){
         Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
         connector.setScheme("http");
