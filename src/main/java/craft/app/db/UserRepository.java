@@ -24,12 +24,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
     
     
-    //todo delete this???
-    /**
-     * Find whether a given username exists in the database, return the name if found
-     * @param username The username to search for
-     * @return A CheckUsername object with the given username
-     */
-   // CheckUsername findAllByUsername(String username);
-    
 }

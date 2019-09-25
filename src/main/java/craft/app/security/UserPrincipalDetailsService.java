@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * Required by Spring Security
+ * Required by Spring Security for finding users by username. Annotated as Service to allow it to
+ * be used in the security configuration class
  */
 @Service
 public class UserPrincipalDetailsService implements UserDetailsService {

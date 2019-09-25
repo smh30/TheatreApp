@@ -40,11 +40,6 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
     
-    //todo remove this in production (or lock to admin)
-//    @GetMapping
-//public List<User> users(){
-//return userRepository.findAll();
-//}
     
     /**
      * Encodes a new user's password and then saves the user into the repository
@@ -70,19 +65,6 @@ public class UserController {
     private String encodePassword(String rawPassword) {
         return passwordEncoder.encode(rawPassword);
     }
-    
-    
-    //todo is this method needed??
-    /**
-     * Checks if a given username exists in the database already - used when a new user registers
-     * to make sure their username is unique
-     * @param username The username to be checked
-     * @return A CheckUsername object with the given username, or null
-     */
-//    @GetMapping(value = "/checkUsername/{username}")
-//    public CheckUsername checkUsername(@PathVariable String username) {
-//        return userRepository.findAllByUsername(username);
-//    }
     
     
     /**

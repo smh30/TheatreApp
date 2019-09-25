@@ -37,11 +37,6 @@ public class User {
     @Column(nullable = false)
     private String password;
     
-//    todo I don't think there's time to set up this functionality
-//    //https://stackoverflow.com/questions/4011472/mappedby-reference-an-unknown-target-entity-property
-//    //https://stackoverflow.com/questions/13027214/what-is-the-meaning-of-the-cascadetype-all-for-a-manytoone-jpa-association
-//    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
-//    private Set<Project> projects = new HashSet<Project>();
     
     
     /**
